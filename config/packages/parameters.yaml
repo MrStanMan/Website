@@ -1,0 +1,2 @@
+parameters:
+  router.request_context.base_url: '%env(string:HOST_BASE_URL)%'

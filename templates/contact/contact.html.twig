@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="contact-wrapper">
+        <h3>Contact</h3>
+        Neem hier contact op.
+        {{ form_start(contact_form) }}
+            <div class="form-group">
+                {{ form_label(contact_form.name, NULL, {'label': 'Naam'}) }}
+                {{ form_widget(contact_form.name, {'attr': {'class': 'form-control'} }) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(contact_form.email, NULL, {'label': 'e-mail'}) }}
+                {{ form_widget(contact_form.email, {'attr': {'class': 'form-control', 'placeholder': 'mail@voorbeeld.nl'} }) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(contact_form.message, NULL, {'label': 'Bericht'}) }}
+                {{ form_widget(contact_form.message, {'attr': {'class': 'form-control', 'placeholder': 'Voer hier uw bericht in.'} }) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(contact_form.submit, NULL, {'label': 'Verstuur'}) }}
+                {{ form_widget(contact_form.submit, {'attr': {'class': 'btn btn-primary'} }) }}
+            </div>
+        {{ form_end(contact_form) }}
+    </div>
+{% endblock %}

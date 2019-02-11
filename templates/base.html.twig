@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        {% block header %}
+            {% include './header/header.html.twig' %}
+        {% endblock %}
+
+        <div class="body-container px-3">
+            {% include 'flash_messages.html.twig' %}
+
+            {% block body %}{% endblock %}
+        </div>
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </body>
+</html>
