@@ -1,6 +1,18 @@
 index:
     path: /
     controller: App\Controller\PageController::index
+
 contact:
     path: /contact
     controller: App\Controller\ContactController::contact
+
+login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+
+app_logout:
+    path: /logout

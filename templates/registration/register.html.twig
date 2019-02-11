@@ -6,9 +6,15 @@
     <h3>Register</h3>
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
+        <div class="form-group">
+            {{ form_label(registrationForm.email, NULL, {'label': 'Email'}) }}
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(registrationForm.plainPassword, NULL, {'label': 'Wachtwoord'}) }}
+            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'mail@voorbeeld.nl'} }) }}
+        </div>
 
-        <button class="btn btn-primary">Register</button>
+        <button class="btn btn-primary">Registreer</button>
     {{ form_end(registrationForm) }}
 {% endblock %}
