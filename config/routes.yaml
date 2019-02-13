@@ -1,16 +1,19 @@
 index:
     path: /
     controller: App\Controller\PageController::index
+admin:
+    path: /admin
+    controller: App\Controller\PageController::admin
 
 contact:
     path: /contact
     controller: App\Controller\ContactController::contact
 
-login:
+app_login:
     path: /login
     controller: App\Controller\SecurityController::login
 
-register:
+app_registration:
     path: /register
     controller: App\Controller\RegistrationController::register
 

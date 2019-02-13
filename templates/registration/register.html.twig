@@ -7,12 +7,16 @@
 
     {{ form_start(registrationForm) }}
         <div class="form-group">
+            {{ form_label(registrationForm.name, NULL, {'label': 'Voor en Achternaam'}) }}
+            {{ form_widget(registrationForm.name, {'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
             {{ form_label(registrationForm.email, NULL, {'label': 'Email'}) }}
-            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'} }) }}
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'mail@voorbeeld.nl'} }) }}
         </div>
         <div class="form-group">
             {{ form_label(registrationForm.plainPassword, NULL, {'label': 'Wachtwoord'}) }}
-            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'mail@voorbeeld.nl'} }) }}
+            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'} }) }}
         </div>
 
         <button class="btn btn-primary">Registreer</button>

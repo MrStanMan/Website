@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class PageController extends AbstractController
 {
@@ -13,4 +15,13 @@ class PageController extends AbstractController
     {
         return $this->render('pages/index.html.twig');
     }
+
+    /**
+     * @return Response
+     */
+    public function admin()
+    {
+        return new Response('<h3>Yeet</h3>');
+    }
+
 }

@@ -13,15 +13,19 @@
             <span class="navbar-text">
                 <ul class="navbar-nav">
                     {% if app.user %}
+                        {{ dump(app.user) }}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('app_logout') }}">Logout <span class="sr-only"></span></a>
+                           <span class="nav-link active">Welkom {{ app.user.name }}!</span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('app_logout') }}">Logout</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('login') }}">Inloggen <span class="sr-only"></span></a>
+                            <a class="nav-link" href="{{ url('app_login') }}">Inloggen</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('register') }}">Registreren <span class="sr-only"></span></a>
+                            <a class="nav-link" href="{{ url('app_registration') }}">Registreren</a>
                         </li>
                     {% endif %}
                 </ul>

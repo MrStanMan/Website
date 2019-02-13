@@ -17,3 +17,6 @@ framework:
         log: true
 
     default_locale: nl_NL
+
+    templating:
+        engines: ['twig', 'php']

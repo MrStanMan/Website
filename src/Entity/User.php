@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Er bestaat al een account met dit email adres.")
  */
 class User implements UserInterface
 {
@@ -18,6 +18,11 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", length=180)
+     */
+    private $name = '';
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -35,9 +40,22 @@ class User implements UserInterface
      */
     private $password;
 
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -68,7 +86,7 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
+
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
