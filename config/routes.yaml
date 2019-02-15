@@ -1,9 +1,6 @@
 index:
     path: /
     controller: App\Controller\PageController::index
-admin:
-    path: /admin
-    controller: App\Controller\PageController::admin
 
 contact:
     path: /contact
@@ -19,3 +16,19 @@ app_registration:
 
 app_logout:
     path: /logout
+
+admin_list:
+    path: /admin
+    controller: App\Controller\AdminController::showList
+
+admin_add:
+    path: /admin/add
+    controller: App\Controller\AdminController::addAction
+
+admin_edit:
+    path: /admin/edit/{id}
+    controller: App\Controller\AdminController::editAction
+
+admin_delete:
+    path: /admin/delete/{id}
+    controller: App\Controller\AdminController::deleteAction

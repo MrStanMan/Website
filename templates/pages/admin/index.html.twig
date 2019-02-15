@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin paneel{% endblock %}
+
+{% block body %}
+<div class="homepage-container homepage">
+    <h3>Admin paneel</h3>
+    <p>Manage hier users en verschillende andere onderdelen</p>
+
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Naam</th>
+                <th scope="col">Email</th>
+                <th scope="col"></th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        {% for user in users %}
+        <tr>
+            <th scope="row">{{ user.id }}</th>
+            <td>{{ user.name|length > 30 ? user.name|slice(0, 30) ~ '...' : user.name}}</td>
+            <td>{{ user.email|length > 30 ? user.email|slice(0, 30) ~ '...' : user.email}}</td>
+            <td>
+                {% if 'ROLE_SUPER_ADMIN' in user.roles %}
+                    Super Admin
+                {% elseif 'ROLE_ADMIN' in user.roles %}
+                    Admin
+                {% else %}
+                    Gebruiker
+                {% endif %}
+            </td>
+            <td>
+                {% if ('ROLE_ADMIN' in user.roles) or ('ROLE_SUPER_ADMIN' in user.roles) %}
+                    <a {# onclick="alert('U kunt geen admin verwijderen')" #} style="pointer-events: all;" class="btn btn-danger disabled" href="{{  path('admin_delete', {'id' : user.id}) }}">Delete</a>
+                {% else %}
+                    <a onclick="return confirm('Weet u zeker dat u het account met user_id: ' + {{ user.id }} + ' wilt verwijderen?')" href="{{ path('admin_delete', {'id' : user.id}) }}" class="btn btn-danger text-white">Delete</a>
+                {% endif %}
+
+                {% if 'ROLE_SUPER_ADMIN' in user.roles %}
+                    <a href="{{ path('admin_edit', {'id' : user.id}) }}" style="pointer-events: all;" class="btn btn-success disabled"><i class="fas fa-edit"></i> Edit</a>
+                {% else %}
+                    <a href="{{ path('admin_edit', {'id' : user.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i> Edit</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url('admin_add') }}" class="btn btn-success">Gebruiker toevoegen</a>
+</div>
+{% endblock %}
