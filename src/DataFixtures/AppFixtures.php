@@ -9,13 +9,23 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    /**
+     * @var UserPasswordEncoderInterface
+     */
     private $encoder;
 
+    /**
+     * AppFixtures constructor.
+     * @param UserPasswordEncoderInterface $encoder
+     */
     public function __construct(userPasswordEncoderInterface $encoder)
     {
         $this->encoder = $encoder;
     }
 
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $user = new User();
@@ -29,6 +39,7 @@ class AppFixtures extends Fixture
         $manager->persist($user);
         $manager->flush();
 
+
         $user = new User();
         $user->setName('Stan');
         $user->setEmail('stan@fizz.nl');
@@ -39,6 +50,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($user);
         $manager->flush();
+
 
         $user = new User();
         $user->setName('User');

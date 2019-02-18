@@ -4,10 +4,10 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('index') }}">Home <span class="sr-only"></span></a>
+                    <a class="{% if app.request.get('_route') == 'index' %}active {% endif %}nav-link" href="{{ url('index') }}">Home <span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('contact') }}">Contact <span class="sr-only"></span></a>
+                    <a class="{% if app.request.get('_route') == 'contact' %}active {% endif %}nav-link" href="{{ url('contact') }}">Contact <span class="sr-only"></span></a>
                 </li>
             </ul>
             <span class="navbar-text">
@@ -16,23 +16,28 @@
                         <li class="nav-item">
                            <span class="nav-link active">Welkom {{ app.user.name }}!</span>
                         </li>
-                    {% if ('ROLE_ADMIN' in app.user.roles) or ('ROLE_SUPER_ADMIN' in app.user.roles) %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" href="#">Admin</a>
-                            <div class="dropdown-menu text-dark dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark" href="{{ url('admin_list') }}">Gebruikers</a>
-                            </div>
-                        </li>
-                    {% endif %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('app_logout') }}">Logout</a>
-                        </li>
+                        {% if ('ROLE_ADMIN' in app.user.roles) or ('ROLE_SUPER_ADMIN' in app.user.roles) %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" href="#">Menu</a>
+                                <div class="dropdown-menu text-dark dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="{% if app.request.get('_route') == 'admin_list' %}active text-white {% else %}text-dark {% endif %}dropdown-item" href="{{ url('admin_list') }}">Gebruikers</a>
+                                    <a class="dropdown-item text-dark" href="{{ url('app_logout') }}">Logout</a>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" href="#">Menu</a>
+                                <div class="dropdown-menu text-dark dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-dark" href="{{ url('app_logout') }}">Logout</a>
+                                </div>
+                            </li>
+                        {% endif %}
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('app_login') }}">Inloggen</a>
+                            <a class="{% if app.request.get('_route') == 'app_login' %}active {% endif %}nav-link" href="{{ url('app_login') }}">Inloggen</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('app_registration') }}">Registreren</a>
+                            <a class="{% if app.request.get('_route') == 'app_register' %}active {% endif %}nav-link" href="{{ url('app_register') }}">Registreren</a>
                         </li>
                     {% endif %}
                 </ul>

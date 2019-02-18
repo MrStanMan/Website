@@ -33,7 +33,7 @@
             </td>
             <td>
                 {% if ('ROLE_ADMIN' in user.roles) or ('ROLE_SUPER_ADMIN' in user.roles) %}
-                    <a {# onclick="alert('U kunt geen admin verwijderen')" #} style="pointer-events: all;" class="btn btn-danger disabled" href="{{  path('admin_delete', {'id' : user.id}) }}">Delete</a>
+                    <a style="pointer-events: all;" class="btn btn-danger disabled" href="{{  path('admin_delete', {'id' : user.id}) }}">Delete</a>
                 {% else %}
                     <a onclick="return confirm('Weet u zeker dat u het account met user_id: ' + {{ user.id }} + ' wilt verwijderen?')" href="{{ path('admin_delete', {'id' : user.id}) }}" class="btn btn-danger text-white">Delete</a>
                 {% endif %}

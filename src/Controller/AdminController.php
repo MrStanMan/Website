@@ -106,6 +106,11 @@ class AdminController extends AbstractController
             $this->addFlash('warning', 'U kunt geen admin verwijderen.');
             return $this->redirectToRoute('admin_list');
         }
+        elseif($id == $post->getID())
+        {
+            $this->addFlash('warning', 'U kunt niet het account verwijderen waar u op bent ingelogd. Log eerst in op een ander account en probeer het dan opnieuw');
+            return $this->redirectToRoute('admin_list');
+        }
 
         $em->remove($post);
         $em->flush();
