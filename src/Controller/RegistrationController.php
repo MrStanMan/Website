@@ -15,8 +15,12 @@ class RegistrationController extends AbstractController
 {
     /**
      * @Route("/register", name="app_register")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param \Swift_Mailer $mailer
+     * @return Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -35,11 +39,25 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $user->setToken($this->generateRandomToken());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            // do anything else you need here, like send an email
+            sleep(1);
+
+            $message = (new \Swift_Message('Activeer uw mail!'))
+                ->setFrom('noreply@stanwebsite.nl')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    'Hallo ' . $user->getName() . '! <br /> Klik hier om uw account te activeren: <a href="' . $this->getParameter('router.request_context.base_url') . '/activate/' . $user->getToken() . '/' . $user->getId() . '">Activeer</a>'
+                    , 'text/html'
+                );
+
+
+            $mailer->send($message);
+            $this->addFlash('success', 'Er is een activatiemail gestuurd naar het ingevulde mail adress!');
 
             return $this->redirectToRoute('app_login');
         }
@@ -48,4 +66,18 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+
+    function generateRandomToken($length = 30)
+    {
+        return substr(
+            str_shuffle(
+                str_repeat(
+                    $x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+                    ceil($length/strlen($x)
+                    )
+                )
+            ),1,$length
+        );
+    }
+
 }

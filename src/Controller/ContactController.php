@@ -22,9 +22,17 @@ class ContactController extends AbstractController
                 ->setFrom($contactFormData['email'])
                 ->setTo('stan@fizz.nl')
                 ->setBody(
-                    $contactFormData['message'],
-                    'text/plain'
+                    'Aangevraagt door: ' . $contactFormData['email'] .
+                    '<br />' .
+                    'Bericht: ' . $contactFormData['message']
+                    , 'text/html'
+                )
+                ->addPart(
+                    'Aangevraagt door: ' . $contactFormData['email'] .
+                    'Bericht: ' . $contactFormData['message']
+                    , 'text/plain'
                 );
+
 
             $mailer->send($message);
 

@@ -7,14 +7,14 @@
     <h3>Admin paneel</h3>
     <p>Manage hier users en verschillende andere onderdelen</p>
 
-    <table class="table">
+    <table class="table table-hover">
         <thead class="thead-light">
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Naam</th>
                 <th scope="col">Email</th>
-                <th scope="col"></th>
                 <th scope="col">Role</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         {% for user in users %}
@@ -38,7 +38,7 @@
                     <a onclick="return confirm('Weet u zeker dat u het account met user_id: ' + {{ user.id }} + ' wilt verwijderen?')" href="{{ path('admin_delete', {'id' : user.id}) }}" class="btn btn-danger text-white">Delete</a>
                 {% endif %}
 
-                {% if 'ROLE_SUPER_ADMIN' in user.roles %}
+                {% if ('ROLE_SUPER_ADMIN' in user.roles) or (user.id == app.user.id) %}
                     <a href="{{ path('admin_edit', {'id' : user.id}) }}" style="pointer-events: all;" class="btn btn-success disabled"><i class="fas fa-edit"></i> Edit</a>
                 {% else %}
                     <a href="{{ path('admin_edit', {'id' : user.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i> Edit</a>

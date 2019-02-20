@@ -25,6 +25,11 @@ class AdminController extends AbstractController
             ]);
     }
 
+    /**
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
+     */
     public function addAction(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
@@ -33,7 +38,6 @@ class AdminController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -55,6 +59,11 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Response
+     */
     public function editAction($id, Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
@@ -70,6 +79,11 @@ class AdminController extends AbstractController
 
             $this->addFlash('warning', 'Een Super Admin kan niet aangepast worden');
 
+            return $this->redirectToRoute('admin_list');
+        }
+        elseif($id == $user->getID())
+        {
+            $this->addFlash('warning', 'U kunt niet het account aanpassen waar u op bent ingelogd. Log eerst in op een ander account en probeer het dan opnieuw');
             return $this->redirectToRoute('admin_list');
         }
 
@@ -90,6 +104,10 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -104,11 +122,6 @@ class AdminController extends AbstractController
         elseif(in_array('ROLE_ADMIN', $post->getRoles()) || in_array('ROLE_SUPER_ADMIN', $post->getRoles()))
         {
             $this->addFlash('warning', 'U kunt geen admin verwijderen.');
-            return $this->redirectToRoute('admin_list');
-        }
-        elseif($id == $post->getID())
-        {
-            $this->addFlash('warning', 'U kunt niet het account verwijderen waar u op bent ingelogd. Log eerst in op een ander account en probeer het dan opnieuw');
             return $this->redirectToRoute('admin_list');
         }
 

@@ -32,6 +32,7 @@ class AppFixtures extends Fixture
         $user->setName('Admin');
         $user->setEmail('admin@fizz.nl');
         $user->setRoles(array('ROLE_SUPER_ADMIN'));
+        $user->setActive(1);
 
         $password = $this->encoder->encodePassword($user, 'password');
         $user->setPassword($password);
@@ -44,6 +45,7 @@ class AppFixtures extends Fixture
         $user->setName('Stan');
         $user->setEmail('stan@fizz.nl');
         $user->setRoles(array('ROLE_ADMIN'));
+        $user->setActive(1);
 
         $password = $this->encoder->encodePassword($user, 'Rektnub');
         $user->setPassword($password);
@@ -56,6 +58,7 @@ class AppFixtures extends Fixture
         $user->setName('User');
         $user->setEmail('user@fizz.nl');
         $user->setRoles(array('ROLE_USER'));
+        $user->setActive(1);
 
         $password = $this->encoder->encodePassword($user, 'password');
         $user->setPassword($password);

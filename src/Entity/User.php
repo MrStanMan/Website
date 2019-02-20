@@ -40,6 +40,16 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $active = 0;
+
+    /**
+     * @ORM\Column(type="string", length=30, unique=true)
+     */
+    private $activation_token;
+
 
     public function getId(): ?int
     {
@@ -110,6 +120,37 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+
+    /**
+     * @return int|null
+     */
+    public function getActive(): ?int
+    {
+        return $this->active;
+    }
+
+    public function setActive(int $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getToken(): ?string
+    {
+        return $this->activation_token;
+    }
+
+    public function setToken(string $activation_token): self
+    {
+        $this->activation_token = $activation_token;
 
         return $this;
     }

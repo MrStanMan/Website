@@ -14,8 +14,30 @@ app_registration:
     path: /register
     controller: App\Controller\RegistrationController::register
 
+app_activation:
+    path: /activate/{token}/{user}
+    controller: App\Controller\AccountController::activate
+    requirements:
+        user: \d+
+
 app_logout:
     path: /logout
+
+user_account:
+    path: /account
+    controller: App\Controller\AccountController::account
+
+user_edit:
+    path: /account/edit/{user}
+    controller: App\Controller\AccountController::editAction
+    requirements:
+        user: \d+
+
+user_delete:
+    path: /account/delete/{user}
+    controller: App\Controller\AccountController::deleteAction
+    requirements:
+        user: \d+
 
 admin_list:
     path: /admin

@@ -20,6 +20,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" href="#">Menu</a>
                                 <div class="dropdown-menu text-dark dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="{% if app.request.get('_route') == 'user_account' %}active text-white {% else %}text-dark {% endif %}dropdown-item" href="{{ url('user_account') }}">Account</a>
                                     <a class="{% if app.request.get('_route') == 'admin_list' %}active text-white {% else %}text-dark {% endif %}dropdown-item" href="{{ url('admin_list') }}">Gebruikers</a>
                                     <a class="dropdown-item text-dark" href="{{ url('app_logout') }}">Logout</a>
                                 </div>
@@ -28,6 +29,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" href="#">Menu</a>
                                 <div class="dropdown-menu text-dark dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="{% if app.request.get('_route') == 'user_account' %}active text-white {% else %}text-dark {% endif %}dropdown-item" href="{{ url('user_account') }}">Account</a>
                                     <a class="dropdown-item text-dark" href="{{ url('app_logout') }}">Logout</a>
                                 </div>
                             </li>

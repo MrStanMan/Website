@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit gebruiker{% endblock %}
+
+{% block body %}
+    <h3>Edit gebruiker {{ user.email|length > 30 ? user.email|slice(0, 30) ~ '...' : user.email}}</h3>
+
+        <a class ="btn btn-info" href="{{ path('user_account') }}"><i class="fas fa-arrow-left"></i> Terug</a><br /><br />
+
+    {{ form_start(addForm) }}
+    <div class="w-25">
+        <div class="form-group">
+            {{ form_label(addForm.name, NULL, {'label': 'Naam'}) }}
+            {{ form_widget(addForm.name, {'attr': {'class': 'form-control'} }) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(addForm.email, NULL, {'label': 'Email'}) }}
+            {{ form_widget(addForm.email, {'attr': {'class': 'form-control', 'placeholder': 'mail@voorbeeld.nl'} }) }}
+        </div>
+
+        <button class="btn btn-primary">Pas aan</button>
+    </div>
+    {{ form_end(addForm) }}
+{% endblock %}
